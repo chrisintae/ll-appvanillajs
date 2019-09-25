@@ -17,8 +17,8 @@
 	// get weather data when user clicks Forecast button, then add temp & conditions to view
 	$('.forecast-button').click(function(e) {
 		e.preventDefault();
-		const location = $('#location').val();
-		$('#location').val('');
+		const location = document.querySelector('#location').value;
+		document.querySelector('#location').value = '';
 
 		$.get(url + location + '&appid=' + apiKey).done(function(response) {
 			updateUISuccess(response);
@@ -44,9 +44,9 @@
 			city: response.name
 		};
 
-		const $into = $('.conditions')[0];
+		const into = document.querySelector('.conditions');
 
-		ReactDOM.render(<Forecast {...state} />, $into);
+		ReactDOM.render(<Forecast {...state} />, into);
 
 		function Forecast(props) {
 			return (
@@ -97,9 +97,9 @@
 			}
 		}
 
-		const $into = $('.activities')[0];
+		const into = document.querySelector('.activities');
 
-		ReactDOM.render(<Activities {...state} />, $into);
+		ReactDOM.render(<Activities {...state} />, into);
 
 		function Activities(props) {
 			const activitiesList = props.activities.map(function(activity, index) {
