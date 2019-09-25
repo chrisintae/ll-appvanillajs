@@ -1,8 +1,8 @@
 "use strict";
 
 (function() {
-	const url = "http://api.openweathermap.org/data/2.5/weather?q=";
-	const apiKey = "APIKEY"; // Replace "APIKEY" with your own API key; otherwise, your HTTP request will not work
+	const URL = "http://api.openweathermap.org/data/2.5/weather?q=";
+	const apiKey = "8dc2471edfe70791c9fe4dbad4fb136c"; // Replace "APIKEY" with your own API key; otherwise, your HTTP request will not work
 	const activities = {
 		teamIn: ['basketball','hockey','volleyball'],
 		teamOutWarm: ['softball/baseball','football/soccer','American football','rowing','tennis','volleyball','ultimate frisbee','rugby'],
@@ -20,9 +20,12 @@
 		const location = document.querySelector('#location').value;
 		document.querySelector('#location').value = '';
 
-		$.get(url + location + '&appid=' + apiKey).done(function(response) {
+		// update to fetch api
+		fetch(URL + location + '&appid=' + apiKey).then(function(response) {
+			return(response.json());
+		}).then(function(response) {
 			updateUISuccess(response);
-		}).fail(function() {
+		}).catch(function(error) {
 			updateUIFailure();
 		});
 	});
